@@ -1,0 +1,30 @@
+<form [formGroup]="myForm" novalidate>
+  <div>
+    <label>Телефон</label>
+    <input name="phone" formControlName="userPhone"/>
+    <code>{{ myForm.controls["userPhone"].errors | json }}</code>
+    <div
+      *ngIf="
+        myForm.controls['userPhone'].invalid &&
+        myForm.controls['userPhone'].touched
+      ">
+      Вы ввели <span style="color: red">{{myForm.controls["userPhone"].getError("phoneValidators")}}</span>. 
+      Введите номер в соответствии с патерном {{ myForm.controls["userPhone"].getError("phonePattern") }}
+    </div>
+  
+  </div>
+  <div>
+    <label>Телефон</label>
+    <input name="secondPhone" formControlName="secondPhone" patternValidator="[0-9]{11}" (click)='click()'/>
+    <code>{{ myForm.controls["secondPhone"].errors | json }}</code>
+    <div
+      *ngIf="
+        myForm.controls['secondPhone'].invalid &&
+        myForm.controls['secondPhone'].touched
+      "
+    >
+    Вы ввели <span style="color: red">{{myForm.controls["secondPhone"].getError("phoneValidators")}}</span>. 
+    Введите номер в соответствии с патерном {{ myForm.controls["secondPhone"].getError("phonePattern") }}
+    </div>
+  </div>
+</form>
